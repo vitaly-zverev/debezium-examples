@@ -21,6 +21,14 @@ services:
     environment:
      - POSTGRES_USER=postgres
      - POSTGRES_PASSWORD=postgres
+  debezium-ui:
+    image: quay.io/debezium/debezium-ui
+    ports: 
+     - 8080:8080
+    links: 
+     - connect
+    environment:
+     - KAFKA_CONNECT_URIS=http://connect:8083
   connect:
     image: quay.io/debezium/connect:${DEBEZIUM_VERSION}
     ports:
